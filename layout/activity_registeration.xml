@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    android:paddingBottom="18dp"
+    android:paddingTop="18dp"
+    android:background="#ffffff"
+    tools:context=".Login">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:id="@+id/logo_image"
+                    android:src="@drawable/logo_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:id="@+id/login"
+                    android:layout_below="@+id/logo_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/textcolor"
+                    android:textSize="22sp" />
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/user_name"
+                android:textColor="@color/textcolor"
+                android:ems="10"
+                android:id="@+id/user"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/textcolor"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="12dp"
+                android:imeOptions="actionNext"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="@string/mobile_no"
+                android:textColor="@color/textcolor"
+                android:ems="10"
+                android:id="@+id/mobile"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/textcolor"
+                android:drawableStart="@drawable/ic_local_phone_black_24dp"
+                android:drawablePadding="12dp"
+                android:imeOptions="actionNext"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/email"
+                android:textColor="@color/textcolor"
+                android:ems="10"
+                android:id="@+id/email"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/textcolor"
+                android:drawableStart="@drawable/ic_email_black_24dp"
+                android:drawablePadding="12dp"
+                android:imeOptions="actionNext"
+                tools:ignore="TextFields" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+                android:textColor="@color/textcolor"
+                android:ems="10"
+                android:id="@+id/password"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/textcolor"
+                android:drawableStart="@drawable/ic_lock_black_24dp"
+                android:drawablePadding="12dp"
+                android:imeOptions="actionNext"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/confirm_password"
+                android:textColor="@color/textcolor"
+                android:ems="10"
+                android:id="@+id/confirmpassword"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/textcolor"
+                android:drawableStart="@drawable/ic_lock_black_24dp"
+                android:drawablePadding="12dp"
+                android:imeOptions="actionNext"/>
+
+
+            <Button
+                android:id="@+id/btn_register"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_signup"
+                android:clickable="true"
+                android:padding="4dp"
+                android:text="@string/submit"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:focusable="true" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
