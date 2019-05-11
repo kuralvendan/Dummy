@@ -9,8 +9,7 @@
     android:paddingRight="18dp"
     android:paddingBottom="18dp"
     android:paddingTop="18dp"
-    android:background="#ffffff"
-    tools:context=".Login">
+    android:background="#ffffff">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -126,7 +125,7 @@
 
 
             <Button
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_submit"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

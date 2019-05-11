@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.binary2quantum.android.intpro.plywoods.productdetails">
+    tools:context="com.binary2quantumtechbase.andapp.intpro.productdetails">
 
     <ScrollView
         android:layout_width="match_parent"

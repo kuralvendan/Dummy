@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="18dp"
+    android:paddingTop="18dp"
+    android:paddingRight="18dp"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+        android:id="@+id/linearly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/logo_image"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:src="@drawable/logo_image" />
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logo_image"
+                android:layout_centerInParent="true"
+                android:text="Verification"
+                android:textColor="@color/textcolor"
+                android:textSize="24sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/userF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="@string/user_name"
+            android:textColor="@color/textcolor"
+            android:textColorHint="@color/textcolor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/mobileF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_local_phone_black_24dp"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="@string/mobile_no"
+            android:textColor="@color/textcolor"
+            android:textColorHint="@color/textcolor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/emailF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_email_black_24dp"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:textColor="@color/textcolor"
+            android:textColorHint="@color/textcolor"
+            android:textSize="20sp"
+            tools:ignore="TextFields" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearly"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:text="wait for the code i sent you"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textColor="@color/colorPrimary" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_below="@id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/editTextCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:digits="0123456789"
+            android:drawablePadding="10dp"
+            android:textSize="22sp"
+            android:hint="enter_verification_code"
+            android:inputType="phone"
+            android:maxLength="10" />
+
+        <Button
+            android:id="@+id/buttonSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextCode"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="16sp"
+            android:background="@color/blue_primary_dark"
+            android:text="@string/submit"
+            android:textColor="@color/white" />
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

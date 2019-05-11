@@ -4,45 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.binary2quantumtechbase.andapp.intpro.plywoods.plywoodbrands">
-
+    tools:context="com.binary2quantumtechbase.andapp.intpro.adhesives.adhesivesdetails">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_marginTop="2dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <TextView
+            android:id="@+id/adh_brandname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:gravity="center"
-            android:text="@string/details"
             android:textColor="@color/titlecolor"
-            android:textSize="24sp"
-            tools:ignore="UnusedAttribute" />
+            android:textSize="22sp" />
 
-
-        <ListView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/adh_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:id="@+id/expandable"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="6dp"/>
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray" />
     </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
         android:background="@color/colorPrimary"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        app:itemIconTint="#ffffff"
+        app:itemTextColor="#ffffff"
         app:menu="@menu/bottom_navigation_item" />
-
 </RelativeLayout>

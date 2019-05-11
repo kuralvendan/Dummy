@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.binary2quantumtechbase.andapp.intpro.plywoods.plywoodbrands">
+    tools:context="com.binary2quantumtechbase.andapp.intpro.adhesives.adhesivesbrands">
 
 
     <LinearLayout
@@ -20,16 +20,16 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:gravity="center"
-            android:text="@string/details"
+            android:text="@string/adhesives_brands"
             android:textColor="@color/titlecolor"
-            android:textSize="24sp"
+            android:textSize="22sp"
             tools:ignore="UnusedAttribute" />
 
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:id="@+id/expandable"
+            android:id="@+id/expandable_adh"
             android:layout_gravity="center_horizontal"
             android:layout_margin="6dp"/>
     </LinearLayout>

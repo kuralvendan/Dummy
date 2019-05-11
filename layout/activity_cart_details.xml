@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_light"
-    tools:context="com.binary2quantum.android.intpro.CartDetails">
+    tools:context="com.binary2quantumtechbase.andapp.intpro.CartDetails">
 
     <LinearLayout
         android:id="@+id/layout_total"

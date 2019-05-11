@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.binary2quantum.android.intpro.plywoods.plywooddetails">
+    tools:context="com.binary2quantumtechbase.andapp.intpro.plywoods.plywooddetails">
 
     <LinearLayout
         android:layout_marginTop="2dp"
