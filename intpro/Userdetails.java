@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro;
+package com.binary2quantumtechbase.andapp.intpro;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,8 +18,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.binary2quantumtechbase.andapp.intpro.databases.AppController;
+import com.binary2quantumtechbase.andapp.intpro.databases.SessionManager;
+import com.binary2quantumtechbase.andapp.intpro.module.OrdertoDelivery;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import instamojo.library.InstamojoPay;
 import instamojo.library.InstapayListener;
@@ -29,17 +40,23 @@ import instamojo.library.InstapayListener;
 public class Userdetails extends AppCompatActivity {
 
     public EditText user_name, user_mobno, user_mail, user_address;
-    public TextView  term_condition;
+    public TextView  term_condition, refer;
     public Button pay_btn;
     public String cname, cmobile, cemail, caddress, camount, price, user_id;
-    public String purpose = "Product Purchase";
+    public String purpose, our_brand, our_type1, our_type2, per_item_price, our_quantity, refer_co;
     public String[] price1;
     public CheckBox ch1;
     public Dialog dialog;
-    BottomNavigationView bottomNavigationView;
-    EditText totalamount;
-    String pay_status = "paid" ;
 //    TextView totalamount;
+    EditText totalamount;
+    String delivery_status = "no";
+    String strsuccess, strmessage;
+    FirebaseDatabase mDatabase;
+
+    String orderuserid;
+    HashMap<String, String> user;
+    SessionManager sessionManager;
+
 
     private void callInstamojoPay(String email, String phone, String amount, String purpose, String buyername) {
         final Activity activity = this;
@@ -53,7 +70,6 @@ public class Userdetails extends AppCompatActivity {
             pay.put("purpose", purpose);
             pay.put("amount", amount);
             pay.put("name", buyername);
-          //  pay.put("address",address);
             pay.put("send_sms", true);
             pay.put("send_email", true);
         } catch (JSONException e) {
@@ -68,6 +84,10 @@ public class Userdetails extends AppCompatActivity {
         listener = new InstapayListener() {
             @Override
             public void onSuccess(String response) {
+                SavetoFirebasedb();
+
+//                deletetempdata(user_id);
+
                 Intent intent = new Intent(Userdetails.this, First_activity.class);
                 startActivity(intent);
                 finish();
@@ -80,26 +100,85 @@ public class Userdetails extends AppCompatActivity {
         };
     }
 
+    private void SavetoFirebasedb() {
+        DatabaseReference mRefer = mDatabase.getReference("OrderList");
+        OrdertoDelivery ordertoDelivery = new OrdertoDelivery();
+
+        ordertoDelivery.setId(user_id);
+
+        cname = user_name.getText().toString();
+        ordertoDelivery.setCustumer_name(cname);
+
+        cmobile = user_mobno.getText().toString();
+        ordertoDelivery.setCustumer_mobile(cmobile);
+
+        cemail = user_mail.getText().toString();
+        ordertoDelivery.setCustumer_email(cemail);
+
+        caddress = user_address.getText().toString();
+        ordertoDelivery.setCustumer_address(caddress);
+
+        ordertoDelivery.setProduct(purpose);
+
+        ordertoDelivery.setBrand(our_brand);
+
+        ordertoDelivery.setCategory1(our_type1);
+
+        ordertoDelivery.setCategory2(our_type2);
+
+        ordertoDelivery.setQuantity(our_quantity);
+
+        ordertoDelivery.setSingle_price(per_item_price);
+
+        camount = totalamount.getText().toString();
+        ordertoDelivery.setAmount(camount);
+
+        ordertoDelivery.setReference_code(refer_co);
+
+        ordertoDelivery.setDelivery_status(delivery_status);
+
+        mRefer.push().setValue(ordertoDelivery);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userdetails);
-        dialog = new Dialog(this);
 
+        sessionManager = new SessionManager(this);
+        user = sessionManager.getUserDetails();
+        orderuserid = user.get(sessionManager.KEY_ID);
+        Log.e("order","orderuserid:"+ orderuserid);
+
+        mDatabase = FirebaseDatabase.getInstance();
+
+        dialog = new Dialog(this);
         Intent intent = getIntent();
         price = intent.getStringExtra("finalprice");
         user_id = intent.getStringExtra("useridenty");
-        purpose = intent.getStringExtra("product");
+        purpose = intent.getStringExtra("our_product");
+        Log.e("firebase","our_product:"+purpose);
+
+        our_brand = intent.getStringExtra("product_brand");
+        Log.e("firebase","product_brand:"+our_brand);
+
+        our_type1 = intent.getStringExtra("product_type1");
+        our_type2 = intent.getStringExtra("product_type2");
+        our_quantity = intent.getStringExtra("product_quantity");
+        per_item_price = intent.getStringExtra("single_price");
+
         Log.e("Userdetails","user number:"+user_id);
         Log.e("Userdetails","amount:"+price);
         Log.e("Userdetails","product:"+purpose);
+        Log.e("Userdetails", "brand:"+our_brand);
+
 
 
         price1 = price.split("\\.",2);
-//        totalamount =  findViewById(R.id.price);
-
         totalamount =  findViewById(R.id.price);
+
+        refer = findViewById(R.id.reference);
 
         user_name = (EditText) findViewById(R.id.user);
         user_mobno = (EditText) findViewById(R.id.mobile);
@@ -124,27 +203,7 @@ public class Userdetails extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.action_home:
-                        Intent in = new Intent(
-                                Userdetails.this, First_activity.class);
-                        startActivity(in);
-                        break;
-                    case R.id.action_cart:
 
-                        break;
-                    case R.id.action_logout:
-                        Intent in2 = new Intent(Userdetails.this, Login.class);
-                        startActivity(in2);
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
 
@@ -195,7 +254,7 @@ public class Userdetails extends AppCompatActivity {
         cemail = user_mail.getText().toString();
         cmobile = user_mobno.getText().toString();
         caddress = user_address.getText().toString();
-
+        refer_co = refer.getText().toString();
         camount = totalamount.getText().toString();
 
         if (TextUtils.isEmpty(cname)) {
@@ -217,10 +276,6 @@ public class Userdetails extends AppCompatActivity {
         else {
             Toast.makeText(Userdetails.this, "Proceeding to Payment", Toast.LENGTH_SHORT).show();
             callInstamojoPay(cemail, cmobile, camount, purpose, cname);
-
-//            ((CartDetails) getParent()).deletetempdata(user_id);
-//            Log.e("Userdetails","user number:"+user_id);
-//             callInstamojoPay(cemail, cmobile, camount, purpose, cname, caddress);
         }
     }
 
@@ -242,5 +297,51 @@ public class Userdetails extends AppCompatActivity {
         Intent intent = new Intent(Userdetails.this, First_activity.class);
         startActivity(intent);
         finish();
+    }
+    private void deletetempdata(final String uid) {
+
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                "https://www.binary2quantumsolutions.com/intpro/cart_delete.php", new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                //	Log.d(TAG, "Register Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+
+                    strsuccess = jObj.getString("success");
+                    strmessage = jObj.getString("message");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //	Log.e(TAG, "Registration Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(), "Check the Internet Connection", Toast.LENGTH_LONG).show();
+                //  hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", uid);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 }

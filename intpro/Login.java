@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro;
+package com.binary2quantumtechbase.andapp.intpro;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -18,8 +18,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.binary2quantum.android.intpro.databases.AppController;
-import com.binary2quantum.android.intpro.databases.SessionManager;
+import com.binary2quantumtechbase.andapp.intpro.databases.AppController;
+import com.binary2quantumtechbase.andapp.intpro.databases.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;

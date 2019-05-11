@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro.module;
+package com.binary2quantumtechbase.andapp.intpro.module;
 
 import android.content.Context;
 

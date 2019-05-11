@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro;
+package com.binary2quantumtechbase.andapp.intpro;
 
 import android.content.Intent;
 import android.net.Uri;

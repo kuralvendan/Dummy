@@ -1,6 +1,5 @@
 package com.binary2quantumtechbase.andapp.intpro.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +13,7 @@ import com.binary2quantumtechbase.andapp.intpro.module.Pricemodule;
 
 import java.util.ArrayList;
 
-/**
- * Created by HP on 1/21/2019.
- */
-
-public class PlywooddetailsAdapter extends RecyclerView.Adapter<PlywooddetailsAdapter.PlywoodViewHolder> {
+public class AdhesivedetailsAdapter extends RecyclerView.Adapter<AdhesivedetailsAdapter.AdhesiveViewHolder> {
 
     private Context mContext;
     private ArrayList<Pricemodule> mExampleList;
@@ -26,37 +21,38 @@ public class PlywooddetailsAdapter extends RecyclerView.Adapter<PlywooddetailsAd
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
-
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener =  listener;
     }
 
-
-    public PlywooddetailsAdapter(Context context, ArrayList<Pricemodule> exampleList)
-    {
+    public AdhesivedetailsAdapter(Context context, ArrayList<Pricemodule> exampleList) {
         this.mContext = context;
         this.mExampleList = exampleList;
     }
+
+
+
     @NonNull
     @Override
-    public PlywooddetailsAdapter.PlywoodViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AdhesiveViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v= LayoutInflater.from(mContext).inflate(R.layout.size_list,viewGroup,false);
+        return new AdhesiveViewHolder(v);
 
-        return new PlywoodViewHolder(v);
+//        return new PlywooddetailsAdapter.PlywoodViewHolder(v);
+
+
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull PlywooddetailsAdapter.PlywoodViewHolder plywoodViewHolder, int i) {
-
+    public void onBindViewHolder(@NonNull AdhesiveViewHolder adhesiveViewHolder, int i) {
         Pricemodule item = mExampleList.get(i);
         String thickness = item.getUthickness();
         String size = item.getUsize();
         String price = item.getUprice();
 
-        plywoodViewHolder.tthickness.setText("Thickness :"+" "+thickness);
-        plywoodViewHolder.tsize.setText("Size :"+" "+size);
-        plywoodViewHolder.tprice.setText(price);
+        adhesiveViewHolder.tthickness.setText("Type :"+" "+thickness);
+        adhesiveViewHolder.tsize.setText("Weight :"+" "+size);
+        adhesiveViewHolder.tprice.setText(price);
 
     }
 
@@ -65,12 +61,12 @@ public class PlywooddetailsAdapter extends RecyclerView.Adapter<PlywooddetailsAd
         return mExampleList.size();
     }
 
-    public class PlywoodViewHolder extends RecyclerView.ViewHolder {
+    public class AdhesiveViewHolder extends RecyclerView.ViewHolder {
         public TextView tthickness;
         public TextView tsize;
         public TextView tprice;
 
-        public PlywoodViewHolder(@NonNull final View itemView) {
+        public AdhesiveViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tthickness=(TextView)itemView.findViewById(R.id.thicknees1);
@@ -90,4 +86,5 @@ public class PlywooddetailsAdapter extends RecyclerView.Adapter<PlywooddetailsAd
             });
         }
     }
+//    extends RecyclerView.Adapter<PlywooddetailsAdapter.PlywoodViewHolder>
 }

@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro;
+package com.binary2quantumtechbase.andapp.intpro;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -19,8 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.binary2quantum.android.intpro.databases.SessionManager;
-import com.binary2quantum.android.intpro.plywoods.plywoodbrands;
+import com.binary2quantumtechbase.andapp.intpro.adhesives.adhesivesbrands;
+import com.binary2quantumtechbase.andapp.intpro.databases.SessionManager;
+import com.binary2quantumtechbase.andapp.intpro.plywoods.plywoodbrands;
 
 public class First_activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -40,14 +41,13 @@ public class First_activity extends AppCompatActivity
         setSupportActionBar(toolbar);
         sessionManager = new SessionManager(this);
 
+
         Intent ply_wood_intent = getIntent();
-        // ply_wood_intent.getStringExtra("name");
         user_name = ply_wood_intent.getStringExtra("name");
         user_id = ply_wood_intent.getStringExtra("userid");
-
-        single_price_edit = ply_wood_intent.getStringExtra("Singleprice");
+//        single_price_edit = ply_wood_intent.getStringExtra("Singleprice");
         Log.e("single","singleprice:"+single_price_edit);
-        
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         textView = (TextView) findViewById(R.id.titleproducts);
@@ -83,7 +83,7 @@ public class First_activity extends AppCompatActivity
 //                        break;
                     case R.id.action_cart:
                         Intent in1 = new Intent(First_activity.this, CartDetails.class);
-                        in1.putExtra("Singleprice2",single_price_edit);
+//                        in1.putExtra("Singleprice2",single_price_edit);
                         startActivity(in1);
                         break;
                     case R.id.action_logout:
@@ -113,9 +113,10 @@ public class First_activity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-//            super.onBackPressed();
         }
+        //else {
+//            super.onBackPressed();
+        //    }
     }
 
 
@@ -165,13 +166,13 @@ public class First_activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        
+
         if (id == R.id.ply_wood_1) {
             Intent ply_wood_intent = new Intent(First_activity.this, plywoodbrands.class);
             ply_wood_intent.putExtra("plywood", "Plywoods");
             ply_wood_intent.putExtra("user_name", user_name);
             Log.e("Dashboard","username:"+user_name);
-            
+
             ply_wood_intent.putExtra("user_id",user_id);
             Log.e("Dashboard","userid:"+user_id);
             startActivity(ply_wood_intent);
@@ -186,7 +187,11 @@ public class First_activity extends AppCompatActivity
             Toast.makeText(First_activity.this, "3", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.adhesive_1) {
-            Toast.makeText(First_activity.this, "4", Toast.LENGTH_SHORT).show();
+            Intent adhesives_intent = new Intent(First_activity.this, adhesivesbrands.class);
+            adhesives_intent.putExtra("adhesives", "Adhesives");
+            adhesives_intent.putExtra("name", user_name);
+            startActivity(adhesives_intent);
+//            Toast.makeText(First_activity.this, "4", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.logout) {
             Intent in2 = new Intent(First_activity.this, Login.class);
@@ -222,7 +227,11 @@ public class First_activity extends AppCompatActivity
                 Toast.makeText(First_activity.this, "3", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.adhesive:
-                Toast.makeText(First_activity.this, "4", Toast.LENGTH_SHORT).show();
+                Intent adhesives_intent = new Intent(First_activity.this, adhesivesbrands.class);
+                adhesives_intent.putExtra("adhesives", "Adhesives");
+                adhesives_intent.putExtra("name", user_name);
+                startActivity(adhesives_intent);
+//                Toast.makeText(First_activity.this, "4", Toast.LENGTH_SHORT).show();
                 break;
         }
 

@@ -1,9 +1,10 @@
-package com.binary2quantumtechbase.andapp.intpro.plywoods;
+package com.binary2quantumtechbase.andapp.intpro.adhesives;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.binary2quantumtechbase.andapp.intpro.About_us;
-import com.binary2quantumtechbase.andapp.intpro.Adapter.PlywooddetailsAdapter;
+import com.binary2quantumtechbase.andapp.intpro.Adapter.AdhesivedetailsAdapter;
 import com.binary2quantumtechbase.andapp.intpro.CartDetails;
 import com.binary2quantumtechbase.andapp.intpro.Contact;
 import com.binary2quantumtechbase.andapp.intpro.First_activity;
@@ -39,14 +40,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class plywooddetails extends AppCompatActivity implements PlywooddetailsAdapter.OnItemClickListener {
+public class adhesivesdetails extends AppCompatActivity implements AdhesivedetailsAdapter.OnItemClickListener{
 
     public static final String EXTRA_THICK = "thickness";
     public static final String EXTRA_SIZE = "size";
     public static final String EXTRA_PRICE = "price";
 
     private RecyclerView mRecyclerView;
-    private PlywooddetailsAdapter mplywoodadapter;
+    private AdhesivedetailsAdapter madhesiveadapter;
     private ArrayList<Pricemodule> mlist;
     private com.android.volley.RequestQueue mRequestQueue;
     String strproduct, strbrand, username, userid;
@@ -56,16 +57,15 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
     BottomNavigationView bottomNavigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plywooddetails);
+        setContentView(R.layout.activity_adhesivesdetails);
 
         Intent intent = getIntent();
-        strproduct = intent.getStringExtra("plywood");
+        strproduct = intent.getStringExtra("adhesives");
         username = intent.getStringExtra("user_name");
         userid = intent.getStringExtra("user_id");
         strbrand = intent.getStringExtra("brand");
-
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,15 +74,15 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
                         Intent in = new Intent(
-                                plywooddetails.this, First_activity.class);
+                                adhesivesdetails.this, First_activity.class);
                         startActivity(in);
                         break;
                     case R.id.action_cart:
-                        Intent in1 = new Intent(plywooddetails.this, CartDetails.class);
+                        Intent in1 = new Intent(adhesivesdetails.this, CartDetails.class);
                         startActivity(in1);
                         break;
                     case R.id.action_logout:
-                        Intent in2 = new Intent(plywooddetails.this, Login.class);
+                        Intent in2 = new Intent(adhesivesdetails.this, Login.class);
                         startActivity(in2);
                         break;
                 }
@@ -90,10 +90,10 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
             }
         });
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.adh_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        t1 = findViewById(R.id.brandname);
+        t1 = findViewById(R.id.adh_brandname);
         t1.setText(strbrand);
 
         mlist = new ArrayList<>();
@@ -124,9 +124,9 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
                         System.out.println("sssscheck" + ssize + sthickness + sprice);
                         mlist.add(new Pricemodule(sthickness, ssize, sprice));
                     }
-                    mplywoodadapter = new PlywooddetailsAdapter(plywooddetails.this, mlist);
-                    mRecyclerView.setAdapter(mplywoodadapter);
-                    mplywoodadapter.setOnItemClickListener(plywooddetails.this);
+                    madhesiveadapter = new AdhesivedetailsAdapter(adhesivesdetails.this, mlist);
+                    mRecyclerView.setAdapter(madhesiveadapter);
+                    madhesiveadapter.setOnItemClickListener(adhesivesdetails.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -145,20 +145,20 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
 
     @Override
     public void onItemClick(int position) {
-        Intent detailIntent = new Intent(plywooddetails.this, productdetails.class);
+        Intent detailIntent = new Intent(adhesivesdetails.this, productdetails.class);
         Pricemodule itemclick = mlist.get(position);
         detailIntent.putExtra(EXTRA_THICK, itemclick.getUthickness());
-        Log.e("plywood_details","thick:"+itemclick.getUthickness());
+        Log.e("adhesive_details","thick:"+itemclick.getUthickness());
         detailIntent.putExtra(EXTRA_SIZE, itemclick.getUsize());
-        Log.e("plywood_details","size:"+itemclick.getUsize());
+        Log.e("adhesive_details","size:"+itemclick.getUsize());
         detailIntent.putExtra(EXTRA_PRICE, itemclick.getUprice());
-        Log.e("plywood_details","price:"+itemclick.getUprice());
+        Log.e("adhesive_details","price:"+itemclick.getUprice());
         detailIntent.putExtra("product", strproduct);
-        Log.e("plywood_details","product:"+strproduct);
+        Log.e("adhesive_details","product:"+strproduct);
 //        detailIntent.putExtra("type", strtype);
 //        Log.e("plywood_details","type:"+strtype);
         detailIntent.putExtra("brand", strbrand);
-        Log.e("plywood_details","brand:"+strbrand);
+        Log.e("adhesive_details","brand:"+strbrand);
         startActivity(detailIntent);
 
     }
@@ -192,9 +192,9 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
                         System.out.println("sssscheck" + ssize + sthickness + sprice);
                         mlist.add(new Pricemodule(sthickness, ssize, sprice));
                     }
-                    mplywoodadapter = new PlywooddetailsAdapter(plywooddetails.this, mlist);
-                    mRecyclerView.setAdapter(mplywoodadapter);
-                    mplywoodadapter.setOnItemClickListener(plywooddetails.this);
+                    madhesiveadapter = new AdhesivedetailsAdapter(adhesivesdetails.this, mlist);
+                    mRecyclerView.setAdapter(madhesiveadapter);
+                    madhesiveadapter.setOnItemClickListener(adhesivesdetails.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -227,7 +227,7 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(plywooddetails.this, plywoodbrands.class);
+        Intent intent = new Intent(adhesivesdetails.this, adhesivesbrands.class);
         startActivity(intent);
         finish();
     }
@@ -248,11 +248,11 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.about_us) {
-            Intent in2 = new Intent(plywooddetails.this, About_us.class);
+            Intent in2 = new Intent(adhesivesdetails.this, About_us.class);
             startActivity(in2);
             return true;
         }  else if(id == R.id.contact){
-            Intent in3 = new Intent(plywooddetails.this, Contact.class);
+            Intent in3 = new Intent(adhesivesdetails.this, Contact.class);
             startActivity(in3);
             return true;
         } else if (id == R.id.rate){
@@ -265,7 +265,7 @@ public class plywooddetails extends AppCompatActivity implements PlywooddetailsA
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.binary2quantum.android.intpro");
-            intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Check out this site!");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Check out this site!");
             startActivity(Intent.createChooser(intent, "Share"));
             return true;
         }

@@ -1,11 +1,11 @@
-package com.binary2quantum.android.intpro.databases;
+package com.binary2quantumtechbase.andapp.intpro.databases;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.binary2quantum.android.intpro.First_activity;
-import com.binary2quantum.android.intpro.Login;
+import com.binary2quantumtechbase.andapp.intpro.First_activity;
+import com.binary2quantumtechbase.andapp.intpro.Login;
 
 import java.util.HashMap;
 

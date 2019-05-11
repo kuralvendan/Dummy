@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro.plywoods;
+package com.binary2quantumtechbase.andapp.intpro.plywoods;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,12 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.binary2quantum.android.intpro.About_us;
-import com.binary2quantum.android.intpro.CartDetails;
-import com.binary2quantum.android.intpro.Contact;
-import com.binary2quantum.android.intpro.First_activity;
-import com.binary2quantum.android.intpro.Login;
-import com.binary2quantum.android.intpro.R;
+import com.binary2quantumtechbase.andapp.intpro.About_us;
+import com.binary2quantumtechbase.andapp.intpro.CartDetails;
+import com.binary2quantumtechbase.andapp.intpro.Contact;
+import com.binary2quantumtechbase.andapp.intpro.First_activity;
+import com.binary2quantumtechbase.andapp.intpro.Login;
+import com.binary2quantumtechbase.andapp.intpro.R;
 
 public class plywoodbrands extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro;
+package com.binary2quantumtechbase.andapp.intpro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.binary2quantum.android.intpro.databases.SessionManager;
+import com.binary2quantumtechbase.andapp.intpro.databases.SessionManager;
 
 public class Splash extends AppCompatActivity {
 

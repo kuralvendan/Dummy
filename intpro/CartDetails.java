@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro;
+package com.binary2quantumtechbase.andapp.intpro;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -11,14 +11,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,10 +22,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.binary2quantum.android.intpro.Adapter.CartAdapter;
-import com.binary2quantum.android.intpro.databases.AppController;
-import com.binary2quantum.android.intpro.databases.SessionManager;
-import com.binary2quantum.android.intpro.module.cartItem;
+import com.binary2quantumtechbase.andapp.intpro.Adapter.CartAdapter;
+import com.binary2quantumtechbase.andapp.intpro.databases.AppController;
+import com.binary2quantumtechbase.andapp.intpro.databases.SessionManager;
+import com.binary2quantumtechbase.andapp.intpro.module.cartItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,10 +35,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.binary2quantum.android.intpro.plywoods.plywooddetails.EXTRA_SIZE;
-import static com.binary2quantum.android.intpro.plywoods.plywooddetails.EXTRA_THICK;
+import static com.binary2quantumtechbase.andapp.intpro.plywoods.plywooddetails.EXTRA_SIZE;
+import static com.binary2quantumtechbase.andapp.intpro.plywoods.plywooddetails.EXTRA_THICK;
 
-public class CartDetails extends AppCompatActivity implements CartAdapter.OnItemClickListener, TextWatcher {
+public class CartDetails extends AppCompatActivity implements CartAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     public Dialog dialog;
@@ -53,11 +49,6 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
     HashMap<String, String> user;
     String userid, product, brand, quantity, price, id, thickness,size;
     String strsuccess, strmessage, totalamount, finalamount;
-
-    EditText qnty;
-    TextView qunty;
-    String  edittotalprice, single_price;
-    int editamount;
 
     JSONObject jsonObject;
     JSONArray jsonArray;
@@ -81,12 +72,6 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
         jsonArray = new JSONArray();
         mlist = new ArrayList<>();
 
-        Intent intent = getIntent();
-        single_price = intent.getStringExtra("Singleprice");
-        Log.e("productdetails","g_price:"+single_price);
-//        single_price = intent.getStringExtra("Singleprice2");
-//        Log.e("first","g_price:"+single_price);
-
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -108,6 +93,7 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
                 return false;
             }
         });
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_cart);
         tv = (TextView) findViewById(R.id.tv_total);
         btn_order = (Button) findViewById(R.id.btn_placeorder);
@@ -119,6 +105,11 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
                 if (mlist.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "No Item Found", Toast.LENGTH_LONG).show();
                 } else {
+//                    finalamount = tv.getText().toString();
+//                    deletetempdata(userid);
+//
+//                    Intent intent = new Intent(CartDetails.this, Userdetails.class);
+//                    startActivity(intent);
                     ordersubmit(userid);
                 }
             }
@@ -242,9 +233,32 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
 
                     if (strsuccess.equals("1")) {
                         finalamount = tv.getText().toString();
+
                         deletetempdata(uid);
+
                         Intent intent = new Intent(CartDetails.this, Userdetails.class);
+
+                        intent.putExtra("our_product",product);
+                        Log.e("firebase","our_product:"+product);
+
+                        intent.putExtra("product_brand",brand);
+                        Log.e("firebase","product_brand:"+brand);
+
+                        intent.putExtra("product_type1",thickness);
+                        Log.e("firebase","product_type1:"+thickness);
+
+                        intent.putExtra("product_type2",size);
+                        Log.e("firebase","product_type2:"+size);
+
+                        intent.putExtra("product_quantity",quantity);
+                        Log.e("firebase","product_qty:"+quantity);
+
+                        intent.putExtra("single_price",price);
+                        Log.e("firebase","single:"+price);
+
                         intent.putExtra("finalprice", finalamount);
+                        Log.e("firebase","finalprice:"+finalamount);
+
                         startActivity(intent);
                     } else {
                         Toast.makeText(CartDetails.this, strmessage, Toast.LENGTH_SHORT).show();
@@ -296,18 +310,6 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
 
                     strsuccess = jObj.getString("success");
                     strmessage = jObj.getString("message");
-
-                    //     deleteitem(id);
-
-
-//                    if(strsuccess.equals("1"))
-//                    {
-//                        Toast.makeText(CartDetails.this, strmessage, Toast.LENGTH_SHORT).show();
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(CartDetails.this, strmessage, Toast.LENGTH_SHORT).show();
-//                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -364,7 +366,7 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
                     public void onClick(DialogInterface paramDialogInterface,
                                         int paramInt) {
 
-                     paramDialogInterface.cancel();
+                        finish();
                     }
                 });
         localBuilder.create().show();
@@ -374,49 +376,7 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
 
     }
 
-    @Override
-    public void OnItemClick_Edit(View view, int position) {
-        showdialog();
-    }
 
-
-    private void showdialog() {
-        dialog.setContentView(R.layout.edit_layout);
-        Button dialogOk =  dialog.findViewById(R.id.qsubmit);
-        qunty  = dialog.findViewById(R.id.TextQty);
-        qnty =  dialog.findViewById(R.id.editTextQ);
-        qnty.addTextChangedListener(this);
-        dialogOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String editqty = qnty.getText().toString();
-
-        if (TextUtils.isEmpty(editqty)) {
-            qnty.setError("Enter the quantity");
-            qnty.requestFocus();
-            return;
-        } else {
-            editamount = Integer.parseInt(editqty) * Integer.parseInt(single_price);
-            edittotalprice = String.valueOf(editamount);
-            qunty.setText(edittotalprice);
-        }
-
-    }
 
     private void deleteitem(final String id) {
 
@@ -481,7 +441,4 @@ public class CartDetails extends AppCompatActivity implements CartAdapter.OnItem
         startActivity(intent);
         finish();
     }
-
-
-
 }

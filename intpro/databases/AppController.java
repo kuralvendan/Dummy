@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro.databases;
+package com.binary2quantumtechbase.andapp.intpro.databases;
 
 import android.app.Application;
 import android.os.Build;

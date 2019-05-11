@@ -1,4 +1,4 @@
-package com.binary2quantum.android.intpro.Adapter;
+package com.binary2quantumtechbase.andapp.intpro.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.binary2quantum.android.intpro.R;
-import com.binary2quantum.android.intpro.module.cartItem;
+import com.binary2quantumtechbase.andapp.intpro.R;
+import com.binary2quantumtechbase.andapp.intpro.module.cartItem;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public interface OnItemClickListener {
         void onItemClick_Delete(int position);
 
-        void OnItemClick_Edit(View view,int position);
+
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -91,7 +91,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         TextView t1,t2,t4;
         TextView t3;
 //        EditText t3;
-        ImageView img_delete,img_edit;
+        ImageView img_delete;
 
         CartViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,7 +100,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             t3 = itemView.findViewById(R.id.ply_quantity);
             t4 = itemView.findViewById(R.id.ply_price);
             img_delete = itemView.findViewById(R.id.delete);
-            img_edit  = itemView.findViewById(R.id.edit);
+
 
             img_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,18 +114,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 }
             });
 
-            img_edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListener != null){
 
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            mListener.OnItemClick_Edit(v,position);
-                        }
-                    }
-                }
-            });
         }
     }
 }
